@@ -1,10 +1,10 @@
-import Main from "./components/Main"
+import PostForm from "./components/PostForm"
 
 function App() {
 
   return (
     <>
-      <Main />
+      <PostForm />
     </>
   )
 }
