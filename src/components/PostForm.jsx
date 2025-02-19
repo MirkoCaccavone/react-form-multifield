@@ -8,70 +8,80 @@ const initialPosts = [
         title: "Introduzione a JavaScript",
         autore: "Mario Rossi",
         contenuto: "JavaScript è un linguaggio di scripting lato client ampiamente utilizzato per lo sviluppo web.",
-        categoria: "JavaScript"
+        categoria: "JavaScript",
+        published: true,
     },
     {
         id: 2,
         title: "Guida a Node.js",
         autore: "Luca Bianchi",
         contenuto: "Node.js è un runtime JavaScript lato server basato su V8, che permette di costruire applicazioni scalabili.",
-        categoria: "Node.js"
+        categoria: "Node.js",
+        published: true,
     },
     {
         id: 3,
         title: "Express: Creare un server",
         autore: "Giulia Verdi",
         contenuto: "Express è un framework minimalista per Node.js che facilita la creazione di server web.",
-        categoria: "Node.js"
+        categoria: "Node.js",
+        published: true,
     },
     {
         id: 4,
         title: "CSS Flexbox e Grid",
         autore: "Francesca Neri",
         contenuto: "Flexbox e Grid sono strumenti potenti per il layout CSS moderno.",
-        categoria: "CSS"
+        categoria: "CSS",
+        published: true,
     },
     {
         id: 5,
         title: "Ottimizzazione delle performance web",
         autore: "Alessandro De Santis",
         contenuto: "Migliorare le performance web significa ridurre i tempi di caricamento e ottimizzare il codice.",
-        categoria: "Web Performance"
+        categoria: "Web Performance",
+        published: false,
     },
     {
         id: 6,
         title: "Async/Await in JavaScript",
         autore: "Paola Moretti",
         contenuto: "Async/Await rende la gestione del codice asincrono più leggibile e mantenibile.",
-        categoria: "JavaScript"
+        categoria: "JavaScript",
+        published: true,
     },
     {
         id: 7,
         title: "REST API con Express e MongoDB",
         autore: "Stefano Gallo",
         contenuto: "Creare API RESTful con Express e MongoDB permette di sviluppare backend scalabili.",
-        categoria: "Backend"
+        categoria: "Backend",
+        published: false,
     },
     {
         id: 8,
         title: "Introduzione a React",
         autore: "Elena Russo",
         contenuto: "React è una libreria front-end per la creazione di interfacce utente dinamiche.",
-        categoria: "React"
+        categoria: "React",
+        published: true,
     },
     {
         id: 9,
         title: "State Management con Redux",
         autore: "Davide Rinaldi",
         contenuto: "Redux è una libreria per la gestione dello stato nelle applicazioni JavaScript.",
-        categoria: "React"
+        categoria: "React",
+        published: true,
     },
     {
         id: 10,
         title: "Autenticazione con JWT e Node.js",
         autore: "Marco Ferrara",
         contenuto: "JSON Web Token è una soluzione per l'autenticazione sicura nelle applicazioni web.",
-        categoria: "Sicurezza"
+        categoria: "Sicurezza",
+        published: true,
     }
 ];
 
@@ -91,9 +101,11 @@ const PostForm = () => {
 
     // funzione di gestione delle info dei campi
     function handleFormData(e) {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
         setFormData((currentFormData) => ({
             ...currentFormData,
-            [e.target.name]: e.target.value,
+            [e.target.name]: value,
         }));
     }
 
@@ -147,6 +159,15 @@ const PostForm = () => {
                     placeholder="Categoria post"
                 />
 
+                <label htmlFor="published">pubblicato</label>
+                <input
+                    type="checkbox"
+                    name="published"
+                    checked={formData.published}
+                    onChange={handleFormData}
+                    id="published"
+                />
+
                 {/* bottone di invio */}
                 <button>Aggiungi</button>
 
@@ -160,6 +181,7 @@ const PostForm = () => {
                     <h3>{post.autore}</h3>
                     <p>{post.contenuto}</p>
                     <h5>{post.categoria}</h5>
+                    <span>{post.published ? "post pubblicato" : "post non pubblicato"}</span>
 
                 </div>
             ))
